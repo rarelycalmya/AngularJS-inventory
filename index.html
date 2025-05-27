@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="CollectGameApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Collectibles Game</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="GameController">
+
+  <h1>Collectibles</h1>
+
+  <!-- Only Apple and Banana buttons -->
+  <button ng-click="collect('Apple')">Apple</button>
+  <button ng-click="collect('Banana')">Banana</button>
+
+  <hr>
+
+  <h2>Inventory</h2>
+  <ul>
+    <!-- Show items in the exact order they were collected -->
+    <li ng-repeat="item in inventory track by $index">{{ item }}</li>
+  </ul>
+
+  <script src="app.js"></script>
+</body>
+</html>
