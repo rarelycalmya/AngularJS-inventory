@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html ng-app="CollectGameApp">
+<html ng-app="OnboardingApp">
 <head>
   <meta charset="UTF-8">
-  <title>Collectibles Game</title>
+  <title>Collectible templates</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   <style>
     .item {
@@ -22,9 +22,9 @@
     }
   </style>
 </head>
-<body ng-controller="GameController">
+<body ng-controller="Controller">
 
-  <h1>Collectibles</h1>
+  <h1>Templates</h1>
 
   <!-- <div class="item" draggable="true"
        ng-dragstart="dragStart($event, 'Apple')">
@@ -37,18 +37,28 @@
   </div> -->
 
 <div class="item" draggable="true"
-     ondragstart="angular.element(this).scope().dragStart(event, 'Apple')">
-  Apple
+     ondragstart="angular.element(this).scope().dragStart(event, 'User Mangament')">
+  User Management
 </div>
 
 <div class="item" draggable="true"
-     ondragstart="angular.element(this).scope().dragStart(event, 'Banana')">
-  Banana
+     ondragstart="angular.element(this).scope().dragStart(event, 'Product Mangament')">
+  Product Management
+</div>
+
+<div class="item" draggable="true"
+     ondragstart="angular.element(this).scope().dragStart(event, 'Payment Gateway')">
+  Payment Gateway
+</div>
+
+<div class="item" draggable="true"
+     ondragstart="angular.element(this).scope().dragStart(event, 'Notifications')">
+  Notifications
 </div>
 
   <hr>
 
-  <h2>Inventory (Drop Here)</h2>
+  <h2>Chosen Templates (Drop Here)</h2>
 
   <div id="inventory"
        ondragover="event.preventDefault()"
