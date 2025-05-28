@@ -4,22 +4,59 @@
   <meta charset="UTF-8">
   <title>Collectibles Game</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <style>
+    .item {
+      display: inline-block;
+      padding: 10px;
+      margin: 10px;
+      background-color: #e0e0e0;
+      border: 1px solid #999;
+      cursor: grab;
+    }
+
+    #inventory {
+      min-height: 100px;
+      padding: 10px;
+      border: 2px dashed #aaa;
+      background-color: #f9f9f9;
+    }
+  </style>
 </head>
 <body ng-controller="GameController">
 
   <h1>Collectibles</h1>
 
-  <!-- Only Apple and Banana buttons -->
-  <button ng-click="collect('Apple')">Apple</button>
-  <button ng-click="collect('Banana')">Banana</button>
+  <!-- <div class="item" draggable="true"
+       ng-dragstart="dragStart($event, 'Apple')">
+    Apple
+  </div>
+
+  <div class="item" draggable="true"
+       ng-dragstart="dragStart($event, 'Banana')">
+    Banana
+  </div> -->
+
+<div class="item" draggable="true"
+     ondragstart="angular.element(this).scope().dragStart(event, 'Apple')">
+  Apple
+</div>
+
+<div class="item" draggable="true"
+     ondragstart="angular.element(this).scope().dragStart(event, 'Banana')">
+  Banana
+</div>
 
   <hr>
 
-  <h2>Inventory</h2>
-  <ul>
-    <!-- Show items in the exact order they were collected -->
-    <li ng-repeat="item in inventory track by $index">{{ item }}</li>
-  </ul>
+  <h2>Inventory (Drop Here)</h2>
+
+  <div id="inventory"
+       ondragover="event.preventDefault()"
+       ondrop="angular.element(this).scope().onDrop(event)">
+    <ul>
+      <li ng-repeat="item in inventory track by $index">{{ item }}</li>
+    </ul>
+  </div>
 
   <script src="app.js"></script>
 </body>

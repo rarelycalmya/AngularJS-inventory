@@ -1,13 +1,19 @@
-// app.js
-
 var app = angular.module('CollectGameApp', []);
 
 app.controller('GameController', function($scope) {
-  // Start with empty inventory
   $scope.inventory = [];
 
-  // Add clicked item to inventory
-  $scope.collect = function(item) {
-    $scope.inventory.push(item);
+  $scope.dragStart = function(event, itemName) {
+    event.dataTransfer.setData("text/plain", itemName);
+  };
+
+  $scope.onDrop = function(event) {
+    event.preventDefault();
+    var item = event.dataTransfer.getData("text/plain");
+
+    // Angular doesn't automatically know to update view from native events
+    $scope.$apply(function() {
+      $scope.inventory.push(item);
+    });
   };
 });
