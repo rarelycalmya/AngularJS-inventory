@@ -1,0 +1,27 @@
+<div ng-controller="GameController">
+  <h1>Hello, {{ currentUser.name }}</h1>
+
+  <div class="item"
+       draggable="true"
+       ondragstart="angular.element(this).scope().dragStart(event, 'Apple')">
+    Apple
+  </div>
+
+  <div class="item"
+       draggable="true"
+       ondragstart="angular.element(this).scope().dragStart(event, 'Banana')">
+    Banana
+  </div>
+
+  <h2>Inventory</h2>
+  <div id="inventory"
+       ondragover="event.preventDefault()"
+       ondrop="angular.element(this).scope().onDrop(event)">
+    <div ng-repeat="item in inventory track by $index">
+      {{item.name}}
+    </div>
+  </div>
+
+  <br>
+  <button ng-click="submitInventory()">Submit Inventory</button>
+</div>

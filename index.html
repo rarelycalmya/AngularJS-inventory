@@ -2,52 +2,28 @@
 <html ng-app="CollectGameApp">
 <head>
   <meta charset="UTF-8">
-  <title>Inventory Game</title>
+  <title>Collect Game</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://code.angularjs.org/1.8.2/angular-route.min.js"></script>
+  <script src="app.js"></script>
   <style>
     .item {
       width: 100px;
       padding: 10px;
-      margin: 10px;
       background-color: lightgreen;
-      border: 1px solid #444;
+      margin: 10px;
       cursor: grab;
-      text-align: center;
+      border: 1px solid green;
     }
-
     #inventory {
-      margin-top: 30px;
+      border: 2px dashed #888;
       padding: 20px;
-      border: 2px dashed #333;
       min-height: 100px;
       background-color: #f9f9f9;
     }
   </style>
 </head>
-<body ng-controller="GameController">
-  <h1>Collectibles</h1>
-
-  <div class="item"
-       draggable="true"
-       ondragstart="angular.element(this).scope().dragStart(event, 'Apple')">
-    Apple
-  </div>
-
-  <div class="item"
-       draggable="true"
-       ondragstart="angular.element(this).scope().dragStart(event, 'Banana')">
-    Banana
-  </div>
-
-  <h2>Inventory</h2>
-  <div id="inventory"
-       ondragover="event.preventDefault()"
-       ondrop="angular.element(this).scope().onDrop(event)">
-    <div ng-repeat="item in inventory track by $index">
-      {{item.name}}
-    </div>
-  </div>
-
-  <script src="app.js"></script>
+<body ng-controller="MainController">
+  <div ng-view></div>
 </body>
 </html>
