@@ -2,60 +2,50 @@
 <html ng-app="CollectGameApp">
 <head>
   <meta charset="UTF-8">
-  <title>Collectibles Game</title>
+  <title>Inventory Game</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   <style>
     .item {
-      display: inline-block;
+      width: 100px;
       padding: 10px;
       margin: 10px;
-      background-color: #e0e0e0;
-      border: 1px solid #999;
+      background-color: lightgreen;
+      border: 1px solid #444;
       cursor: grab;
+      text-align: center;
     }
 
     #inventory {
+      margin-top: 30px;
+      padding: 20px;
+      border: 2px dashed #333;
       min-height: 100px;
-      padding: 10px;
-      border: 2px dashed #aaa;
       background-color: #f9f9f9;
     }
   </style>
 </head>
 <body ng-controller="GameController">
-
   <h1>Collectibles</h1>
 
-  <!-- <div class="item" draggable="true"
-       ng-dragstart="dragStart($event, 'Apple')">
+  <div class="item"
+       draggable="true"
+       ondragstart="angular.element(this).scope().dragStart(event, 'Apple')">
     Apple
   </div>
 
-  <div class="item" draggable="true"
-       ng-dragstart="dragStart($event, 'Banana')">
+  <div class="item"
+       draggable="true"
+       ondragstart="angular.element(this).scope().dragStart(event, 'Banana')">
     Banana
-  </div> -->
+  </div>
 
-<div class="item" draggable="true"
-     ondragstart="angular.element(this).scope().dragStart(event, 'Apple')">
-  Apple
-</div>
-
-<div class="item" draggable="true"
-     ondragstart="angular.element(this).scope().dragStart(event, 'Banana')">
-  Banana
-</div>
-
-  <hr>
-
-  <h2>Inventory (Drop Here)</h2>
-
+  <h2>Inventory</h2>
   <div id="inventory"
        ondragover="event.preventDefault()"
        ondrop="angular.element(this).scope().onDrop(event)">
-    <ul>
-      <li ng-repeat="item in inventory track by $index">{{ item }}</li>
-    </ul>
+    <div ng-repeat="item in inventory track by $index">
+      {{item.name}}
+    </div>
   </div>
 
   <script src="app.js"></script>
