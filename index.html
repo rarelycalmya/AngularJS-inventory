@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html ng-app="CollectGameApp">
 <head>
-  <meta charset="UTF-8">
-  <title>Collect Game</title>
+  <meta charset="UTF-8" />
+  <title>Collectibles Game - Single Page</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-  <script src="https://code.angularjs.org/1.8.2/angular-route.min.js"></script>
   <script src="app.js"></script>
   <style>
     .item {
@@ -14,16 +13,73 @@
       margin: 10px;
       cursor: grab;
       border: 1px solid green;
+      display: inline-block;
+      text-align: center;
+      user-select: none;
     }
     #inventory {
       border: 2px dashed #888;
       padding: 20px;
       min-height: 100px;
       background-color: #f9f9f9;
+      margin-top: 20px;
+    }
+    button {
+      margin-top: 15px;
     }
   </style>
 </head>
 <body ng-controller="MainController">
-  <div ng-view></div>
+
+  <!-- Enter user name screen -->
+  <div ng-show="page === 'enter'">
+    <h2>Enter your name to start collecting</h2>
+    <input type="text" ng-model="userName" placeholder="Your name" />
+    <button ng-click="startGame()" ng-disabled="!userName.trim()">Start</button>
+  </div>
+
+  <!-- Game screen -->
+  <div ng-show="page === 'game'">
+    <h1>Hello, {{ currentUser.name }}</h1>
+
+    <div class="item"
+         draggable="true"
+         ng-dragstart="dragStart($event, 'Apple')"
+         ondragstart="angular.element(this).scope().dragStart(event, 'Apple')">
+      Apple
+    </div>
+
+    <div class="item"
+         draggable="true"
+         ng-dragstart="dragStart($event, 'Banana')"
+         ondragstart="angular.element(this).scope().dragStart(event, 'Banana')">
+      Banana
+    </div>
+
+    <h2>Inventory (in order added)</h2>
+    <div id="inventory"
+         ondragover="event.preventDefault()"
+         ondrop="angular.element(this).scope().onDrop(event)">
+      <div ng-repeat="item in currentUser.inventory track by $index">
+        {{item.name}}
+      </div>
+    </div>
+
+    <button ng-click="goToSummary()">Submit Inventory & View All Users</button>
+  </div>
+
+  <!-- Summary screen -->
+  <div ng-show="page === 'summary'">
+    <h2>All Users and Their Inventories</h2>
+    <div ng-repeat="user in allUsers">
+      <h3>{{user.name}}</h3>
+      <ul>
+        <li ng-repeat="item in user.inventory">{{item.name}}</li>
+      </ul>
+    </div>
+
+    <button ng-click="resetGame()">Add Another User</button>
+  </div>
+
 </body>
 </html>
